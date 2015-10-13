@@ -6,14 +6,27 @@
 		<artifactId>dbdou-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.dbdou.app</groupId>
-	<artifactId>dbdou-app-wechat</artifactId>
+	<groupId>com.dbdou.admin</groupId>
+	<artifactId>dbdou-admin</artifactId>
 	<packaging>war</packaging>
-	<name>dbdou-app-wechat</name>
-	<description>dbdou-app-wechat</description>
+	<name>dbdou-admin</name>
+	<description>dbdou-admin</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.dbdou.util</groupId>
+			<artifactId>dbdou-util</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.dbdou.admin</groupId>
+			<artifactId>dbdou-admin-service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 
 	<build>
-		<finalName>dbdou-app-wechat</finalName>
+		<finalName>dbdou-app-blog</finalName>
 
 		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
 		<outputDirectory>${basedir}/target/classes</outputDirectory>

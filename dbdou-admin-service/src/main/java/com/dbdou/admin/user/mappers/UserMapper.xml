@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dbdou.admin.user.dao.IUserDao">
+
+	<resultMap type="com.dbdou.admin.user.model.User" id="userMap">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="gender" column="gender" />
+		<result property="birthday" column="birthday" />
+		<result property="email" column="email" />
+		<result property="tel" column="tel" />
+		<result property="city" column="city" />
+		<result property="password" column="password" />
+		<result property="roles" column="roles" />
+		<result property="points" column="points" />
+		<result property="status" column="status" />
+	</resultMap>
+
+	<insert id="save" parameterType="com.dbdou.admin.user.model.User">
+		INSERT INTO a_user (name,gender,birthday,email,tel,city,password,roles,points,status) VALUES(
+			#{name},
+			#{gender},
+			#{birthday},
+			#{email},
+			#{tel},
+			#{city},
+			md5(#{password}),
+			#{roles},
+			#{points},
+			#{status}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.dbdou.admin.user.model.User">
+		UPDATE a_user 
+		<set>
+			<trim suffixOverrides=",">
+				<if test="name != null and name != ''">
+					name = #{name},
+				</if>
+				<if test="gender != null and gender != ''">
+					gender = #{gender},
+				</if>
+				<if test="birthday != null and birthday != ''">
+					birthday = #{birthday},
+				</if>
+				<if test="email != null and email != ''">
+					email = #{email},
+				</if>
+				<if test="tel != null and tel != ''">
+					tel = #{tel},
+				</if>
+				<if test="city != null and city != ''">
+					city = #{city},
+				</if>
+				<if test="password != null and password != ''">
+					password = #{password},
+				</if>
+				<if test="roles != null and roles != ''">
+					roles = #{roles},
+				</if>
+				<if test="points > 0">
+					points = #{points},
+				</if>
+				<if test="status > 0">
+					status = #{status}
+				</if>
+			</trim>
+		</set>
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM a_user WHERE id = #{id}
+	</delete>
+
+	<select id="getById" parameterType="int" resultMap="userMap">
+		SELECT * FROM a_user WHERE id = #{id}
+	</select>
+
+	<select id="getList" parameterType="com.dbdou.admin.user.model.User" resultMap="userMap">
+		SELECT * FROM a_user 
+		<where>
+			<trim suffixOverrides="AND">
+				<if test="name != null and name != ''">
+					name = #{name} AND
+				</if>
+				<if test="gender != null and gender != ''">
+					gender = #{gender} AND
+				</if>
+				<if test="birthday != null and birthday != ''">
+					birthday = #{birthday} AND
+				</if>
+				<if test="email != null and email != ''">
+					email = #{email} AND
+				</if>
+				<if test="tel != null and tel != ''">
+					tel = #{tel} AND
+				</if>
+				<if test="city != null and city != ''">
+					city = #{city} AND
+				</if>
+				<if test="roles != null and roles != ''">
+					roles = #{roles} AND
+				</if>
+				<if test="points > 0">
+					points = #{points} AND
+				</if>
+				<if test="status > 0">
+					status = #{status}
+				</if>
+			</trim>
+		</where>
+	</select>
+
+	<select id="getByNameAndPwd" parameterType="com.dbdou.admin.user.model.User" resultMap="userMap">
+		SELECT * FROM a_user WHERE name = #{name} AND md5(#{password})
+	</select>
+
+</mapper>

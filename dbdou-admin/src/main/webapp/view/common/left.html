@@ -1,0 +1,7 @@
+<div id="sidebar">
+  <ul>
+	<#list authes as auth>
+	  <li><a href="${auth.menu}"><i class="icon ${auth.style!}"></i> <span>${auth.name}</span></a></li>
+	</#list>
+  </ul>
+</div>

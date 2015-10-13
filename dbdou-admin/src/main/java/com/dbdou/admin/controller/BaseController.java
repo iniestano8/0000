@@ -31,8 +31,9 @@ public class BaseController {
 
 	@RequestMapping("/")
 	public ModelAndView toIndex(ModelAndView mav, HttpServletRequest request) {
-		mav.getModel().put("user", getLoginUser(request));
-		mav.getModel().put("authes", getAuthesByLoginUser(request));
+		User user = getLoginUser(request);
+		mav.getModel().put("user", user);
+		mav.getModel().put("authes", getAuthesByLoginUser(user));
 		mav.setViewName("index");
 		return mav;
 	}
@@ -55,12 +56,13 @@ public class BaseController {
 	}
 
 	protected Role getRoleByLoginUser(HttpServletRequest request) {
+
+		return getRoleByLoginUser(getLoginUser(request));
+	}
+
+	protected Role getRoleByLoginUser(User user) {
 		Role role = new Role();
-		User user = getLoginUser(request);
-		if (!ValidateUtil.isValid(user)) {
-			return null;
-		}
-		String roleStr = getLoginUser(request).getRoles();
+		String roleStr = user.getRoles();
 		if (ValidateUtil.isValid(roleStr)) {
 			String[] roleArr = roleStr.split("-");
 			if (ValidateUtil.isValid(roleArr)) {
@@ -72,15 +74,22 @@ public class BaseController {
 
 	protected List<Auth> getAuthesByLoginUser(HttpServletRequest request) {
 		List<Auth> authes = null;
-		Role role = getRoleByLoginUser(request);
-		if (!ValidateUtil.isValid(role)) {
-			return null;
-		}
 		String authStr = getRoleByLoginUser(request).getAuthes();
 		if (ValidateUtil.isValid(authStr)) {
-			String[] authArr = authStr.split("-");
+			String[] authArr = authStr.split("\\+");
 			authes = authService.getByIds(Arrays.asList(authArr));
 		}
 		return authes;
 	}
+
+	protected List<Auth> getAuthesByLoginUser(User user) {
+		List<Auth> authes = null;
+		String authStr = getRoleByLoginUser(user).getAuthes();
+		if (ValidateUtil.isValid(authStr)) {
+			String[] authArr = authStr.split("\\+");
+			authes = authService.getByIds(Arrays.asList(authArr));
+		}
+		return authes;
+	}
+
 }

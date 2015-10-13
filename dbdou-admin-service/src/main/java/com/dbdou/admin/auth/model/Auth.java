@@ -9,6 +9,8 @@ public class Auth {
 	private String type;
 	private String style;
 	
+	private String hasChild;
+	
 	public int getId() {
 		return id;
 	}
@@ -44,6 +46,12 @@ public class Auth {
 	}
 	public void setStyle(String style) {
 		this.style = style;
+	}
+	public String getHasChild() {
+		return hasChild;
+	}
+	public void setHasChild(String hasChild) {
+		this.hasChild = hasChild;
 	}
 
 }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+html, body{ margin:0;}
+body{ background-color:#000; color:#fff; font-size:14px;}
+
+.fs14{ font-size:14px;}
+#commond{ background-color:#000; min-width:500px; border:0; color:#fff; font-size:14px;}
+#commond:focus{ outline-width:0; outline-color:#000; outline-offset:0;}
+</style>
+</head>
+<body>
+
+<p class="fs14">Last login: Mon Obj 19 22:19:34 on console<p/>
+
+<div id="history"></div>
+
+0000deMacBook-Pro:~ a0000$ &nbsp;&nbsp; 
+	<input type="text" value="" id="commond"/>
+
+
+
+<script type="text/javascript" src="/js/commond-line/jquery.min.js"></script>
+<script type="text/javascript" src="/js/commond-line/commond.js"></script>
+<script type="text/javascript">
+var COMMOND_NAME_LIST = getCommondNameList();
+console.log(COMMOND_NAME_LIST);
+$(function(){
+	$(document).keyup(function(e){
+		var curKey = e.which;
+		if(curKey == 13){
+			var commond = $("#commond").val();
+			var _div = "<div><p>0000deMacBook-Pro:~ a0000$ &nbsp;&nbsp; " + commond;
+			if($.inArray(commond, COMMOND_NAME_LIST) < 0){
+				_div += "</br> -bash: " + commond + ": command not found";
+			}
+			_div += "</p></div>";
+			$("#history").append(_div);
+			// processCommond(commond);
+			$("#commond").val("");
+
+		}
+	})
+
+})
+</script>
+</body>
+</html>

@@ -25,7 +25,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/"/>
-			<mvc:mapping path="/blogManage"/>
+			<mvc:mapping path="/blogManage/**"/>
 			<bean id="loginInterceptor" class="com.dbdou.admin.interceptor.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

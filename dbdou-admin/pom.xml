@@ -26,7 +26,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>dbdou-app-blog</finalName>
+		<finalName>dbdou-admin</finalName>
 
 		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
 		<outputDirectory>${basedir}/target/classes</outputDirectory>

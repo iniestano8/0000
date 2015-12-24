@@ -21,7 +21,7 @@ public class ConstantUtil {
 	/**
 	 * 应用的secret
 	 */
-	public static final String SECRET = "a7c78efc3b59b11460aeaa2c4f979c6d";
+	public static final String SECRET = "xxxxxx";
 
 	/**
 	 * token
